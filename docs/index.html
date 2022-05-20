@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3c.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+<meta charset="utf8"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" rel="stylesheet"/>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.5.1/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="./jqcloud.css"/>
+<script type="text/javascript" src="./jqcloud-1.0.4.js"></script>
+<script type="text/javascript" src="./webspeechpi.js"></script>
+
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+<meta name="apple-mobile-web-app-title" content="Web Speech PI"/>
+
+<title>Web Speech PI</title>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Web Speech PI</a>
+</nav>
+
+<div class="container" id="main_div" style="position: relative; top: 20px;">
+  <div>
+    <table width="100%">
+      <tr>
+        <td width="30%"><span id="status"></span></td>
+        <td><div id="tagcloud"></div></td>
+      </tr>
+    </table>
+  </div>
+
+  <textarea id="result_text" style="background-color: #cfc;" class="form-control" cols="100" rows="2" readonly>
+  </textarea>
+
+  <textarea id="result_texts" style="background-color: #fcc;" class="form-control" cols="100" rows="5" readonly>
+  </textarea>
+  <br/>
+  <br/>
+  <input type="button" class="btn btn-primary" onClick="vr_function();" value="マイクオン">
+</div>
+
+</body>
+</html>
