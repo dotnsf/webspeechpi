@@ -52,7 +52,7 @@ function vr_function() {
   $('#status').html( 'Start' );
   recognition.start();
 
-  $('#miconbtn').css( 'display', 'none' );
+  $('#miconbtnspan').css( 'display', 'none' );
 }
 
 function generateTagCloud(){
