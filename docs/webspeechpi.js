@@ -51,6 +51,8 @@ function vr_function() {
   flag_speech = 0;
   $('#status').html( 'Start' );
   recognition.start();
+
+  $('#miconbtn').css( 'display', 'none' );
 }
 
 function generateTagCloud(){
