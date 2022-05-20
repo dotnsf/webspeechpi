@@ -4,7 +4,7 @@ var texts = '';
 
 function vr_function() {
   window.SpeechRecognition = window.SpeechRecognition || webkitSpeechRecognition;
-  var recognition = new SpeechRecognition(); //webkitSpeechRecognition();
+  var recognition = new SpeechRecognition();
   recognition.lang = 'ja';
   recognition.interimResults = true;
   recognition.continuous = true;
@@ -28,12 +28,13 @@ function vr_function() {
 
   recognition.onresult = function(event) {
     var results = event.results;
+        console.log( results );
     for( var i = event.resultIndex; i < results.length; i++ ){
       if( results[i].isFinal ){
         var text = results[i][0].transcript;
         $('#result_text').html( text );
 
-        texts += text;
+        texts += ( ' ' + text );
         $('#result_texts').html( texts );
         
         vr_function();
