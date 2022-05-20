@@ -1,4 +1,6 @@
 //. webspeechpi.js
+var segmenter = new TinySegmenter();
+
 var flag_speech = 0;
 var texts = '';
 
@@ -34,7 +36,7 @@ function vr_function() {
         var text = results[i][0].transcript;
         $('#result_text').html( text );
 
-        texts += ( ' ' + text );
+        texts += ( ' ' + text + '。' );
         $('#result_texts').html( texts );
         
         vr_function();
@@ -59,8 +61,8 @@ function vr_function() {
 function generateTagCloud(){
   //. http://dotnsf.blog.jp/archives/1034375557.html
   var tags = {};
-  var tmp = texts.split( ' ' );
-  tmp.forEach( function( tag ){
+  var segs = segmenter.segment( texts );
+  segs.forEach( function( tag ){
     if( tag in tags ){
       tags[tag] ++;
     }else{
