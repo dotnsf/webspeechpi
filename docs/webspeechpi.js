@@ -30,10 +30,11 @@ function vr_function() {
 
   recognition.onresult = function(event) {
     var results = event.results;
-        console.log( results );
+    //console.log( results );
     for( var i = event.resultIndex; i < results.length; i++ ){
       if( results[i].isFinal ){
         var text = results[i][0].transcript;
+        var confidence = results[i][0].confidence;
         $('#result_text').html( text );
 
         texts += ( ' ' + text + '。' );
