@@ -37,7 +37,7 @@ function vr_function() {
         var confidence = results[i][0].confidence;
         $('#result_text').html( text );
 
-        texts += ( ' ' + text + '。' );
+        texts += ( ' ' + text );
         $('#result_texts').html( texts );
         
         vr_function();
