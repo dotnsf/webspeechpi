@@ -1,4 +1,5 @@
 //. webspeechpi.js
+var MIN_WORDS_PI = 30;
 var segmenter = new TinySegmenter();
 
 var flag_speech = 0;
@@ -78,4 +79,21 @@ function generateTagCloud(){
 
   $('#tagcloud').html( '' );
   $('#tagcloud').jQCloud( word_list, { width: 500, height: 200 } );
+
+  if( word_list.length >= MIN_WORDS_PI ){
+    $('#result_pi').html( '' );
+    $.ajax({
+      url: './api/pi',
+      type: 'POST',
+      data: { text: texts },
+      dataType: 'json',
+      success: function( result ){
+        //console.log( result );
+        $('#result_pi').html( JSON.stringify( result, null, 2 ) );
+      },
+      error: function( e0, e1, e2 ){
+        console.log( e1, e1, e2 );
+      }
+    });
+  }
 }

@@ -3,6 +3,9 @@ var express = require( 'express' ),
     bodyParser = require( 'body-parser' ),
     app = express();
 
+var urapi = require( './api/urapi' );
+app.use( '/api', urapi );
+
 app.use( bodyParser.urlencoded( { extended: true } ) );
 app.use( bodyParser.json() );
 app.use( express.Router() );
