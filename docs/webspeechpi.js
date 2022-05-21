@@ -74,10 +74,12 @@ function generateTagCloud(){
   var tags = {};
   var segs = segmenter.segment( texts );
   segs.forEach( function( tag ){
-    if( tag in tags ){
-      tags[tag] ++;
-    }else{
-      tags[tag] = 1;
+    if( isValidTag( tag ) ){
+      if( tag in tags ){
+        tags[tag] ++;
+      }else{
+        tags[tag] = 1;
+      }
     }
   });
 
@@ -106,4 +108,23 @@ function generateTagCloud(){
       }
     });
   }
+}
+
+function isValidTag( tag ){
+  var r = true;
+
+  if( !tag ){
+    r = false;
+  }else if( tag.length > 2 ){
+    r = true;
+  }else{
+    var b = false;
+    for( var i = 0; i < tag.length && !b; i ++ ){
+      var c = tag.substr( i, 1 );
+      b = !( 'あ' <= c && c <= 'ん' );
+    }
+    r = b;
+  }
+
+  return r;
 }
