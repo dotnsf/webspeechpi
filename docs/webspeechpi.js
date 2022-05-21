@@ -118,7 +118,7 @@ function drawChart( result ){
   var data = [];
 
   if( result && result.result && result.result.personality ){
-    for( var i = 0; i < 5; i ++ ){
+    for( var i = 0; i < result.result.personality.length; i ++ ){
       var personality = result.result.personality[i];
       //labels.push( personality.name ); //. [ 'Openness', 'Conscientiousness', 'Extraversion', 'Agreeableness', 'Emotional range' ]
       data.push( personality.percentile );
