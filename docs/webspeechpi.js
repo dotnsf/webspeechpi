@@ -76,6 +76,6 @@ function generateTagCloud(){
     word_list.push( { text: tag, weight: tags[tag] } );
   });
 
-  $('#tagcloud').html( '' );
+  $('#tagcloud_td').html( '<div id="tagcloud"></div>' );
   $('#tagcloud').jQCloud( word_list, { width: 500, height: 200 } );
 }
