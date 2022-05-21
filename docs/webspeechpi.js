@@ -6,56 +6,65 @@ var flag_speech = 0;
 var texts = '';
 
 function vr_function() {
-  window.SpeechRecognition = window.SpeechRecognition || webkitSpeechRecognition;
-  var recognition = new SpeechRecognition();
-  recognition.lang = 'ja';
-  recognition.interimResults = true;
-  recognition.continuous = true;
-
-  recognition.onsoundstart = function() {
-    $('#status').html( '認識中' );
-  };
-  recognition.onnomatch = function() {
-    $('#status').html( 'もう一度試してください。' );
-  };
-  recognition.onerror = function() {
-    $('#status').html( 'エラー' );
-    if( flag_speech == 0 ){
-      vr_function();
-    }
-  };
-  recognition.onsoundend = function() {
-    $('#status').html( '停止中' );
-    vr_function();
-  };
-
-  recognition.onresult = function(event) {
-    var results = event.results;
-    //console.log( results );
-    for( var i = event.resultIndex; i < results.length; i++ ){
-      if( results[i].isFinal ){
-        var text = results[i][0].transcript;
-        var confidence = results[i][0].confidence;
-        $('#result_text').html( text );
-
-        texts += ( ' ' + text );
-        $('#result_texts').html( texts );
-        
-        vr_function();
-
-        //. タグクラウド
-        generateTagCloud();
-      }else{
-        var text = results[i][0].transcript;
-        $('#result_text').html( "[途中経過] " + text );
-        flag_speech = 1;
-      }
-    }
+  var recognition = null;
+  try{
+    window.SpeechRecognition = window.SpeechRecognition || webkitSpeechRecognition;
+    recognition = new SpeechRecognition();
+  }catch( e ){
   }
 
-  flag_speech = 0;
-  $('#status').html( 'Start' );
-  recognition.start();
+  if( recognition ){
+    recognition.lang = 'ja';
+    recognition.interimResults = true;
+    recognition.continuous = true;
+
+    recognition.onsoundstart = function() {
+      $('#status').html( '認識中' );
+    };
+    recognition.onnomatch = function() {
+      $('#status').html( 'もう一度試してください。' );
+    };
+    recognition.onerror = function() {
+      $('#status').html( 'エラー' );
+      if( flag_speech == 0 ){
+        vr_function();
+      }
+    };
+    recognition.onsoundend = function() {
+      $('#status').html( '停止中' );
+      vr_function();
+    };
+
+    recognition.onresult = function(event) {
+      var results = event.results;
+      //console.log( results );
+      for( var i = event.resultIndex; i < results.length; i++ ){
+        if( results[i].isFinal ){
+          var text = results[i][0].transcript;
+          var confidence = results[i][0].confidence;
+          $('#result_text').html( text );
+
+          texts += ( ' ' + text );
+          $('#result_texts').html( texts );
+          
+          vr_function();
+  
+          //. タグクラウド
+          generateTagCloud();
+        }else{
+          var text = results[i][0].transcript;
+          $('#result_text').html( "[途中経過] " + text );
+          flag_speech = 1;
+        }
+      }
+    }
+
+    flag_speech = 0;
+    $('#status').html( 'Start' );
+    recognition.start();
+  }else{
+    alert( "このブラウザでは Web Speech API がサポートされていません" );
+  }
 
   $('#miconbtnspan').css( 'display', 'none' );
 }
