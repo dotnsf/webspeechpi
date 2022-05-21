@@ -1,5 +1,5 @@
 //. webspeechpi.js
-var MIN_WORDS_PI = 30;
+var MIN_WORDS_PI = 20;
 var segmenter = new TinySegmenter();
 
 var flag_speech = 0;
@@ -102,12 +102,68 @@ function generateTagCloud(){
       success: function( result ){
         //console.log( result );
         $('#result_pi').html( JSON.stringify( result, null, 2 ) );
+
+        //. Chart.js
+        drawChart( result );
       },
       error: function( e0, e1, e2 ){
         console.log( e1, e1, e2 );
       }
     });
   }
+}
+
+function drawChart( result ){
+  var labels = [];
+  var data = [];
+
+  if( result && result.result && result.result.personality ){
+    for( var i = 0; i < 5; i ++ ){
+      var personality = result.result.personality[i];
+      labels.push( personality.name );
+      data.push( personality.percentile );
+    }
+  }
+
+  var data = {
+    labels: labels,
+    datasets: [
+      {
+        label: 'Personality Insights',
+        data: data,
+        backgroundColor: [
+          'rgba( 255,  99, 132, 0.2 )',
+          'rgba(  54, 162, 235, 0.2 )',
+          'rgba( 255, 206,  86, 0.2 )',
+          'rgba(  75, 192, 192, 0.2 )',
+          'rgba( 153, 102, 255, 0.2 )',
+        ],
+        borderColor: [
+          'rgba( 255,  99, 132, 0.2 )',
+          'rgba(  54, 162, 235, 0.2 )',
+          'rgba( 255, 206,  86, 0.2 )',
+          'rgba(  75, 192, 192, 0.2 )',
+          'rgba( 153, 102, 255, 0.2 )',
+        ],
+        borderWidth: 1
+      }
+    ]
+  };
+  var options = {
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  };
+
+  $('#chart_td').html( '<canvas id="mychart" width="400" height="300"></canvas>' );
+  var ctx = document.getElementById( 'mychart' );
+  var chart = new Chart( ctx, {
+    type: 'bar',
+    data: data,
+    options: options
+  });
 }
 
 function isValidTag( tag ){
