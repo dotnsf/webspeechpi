@@ -114,13 +114,13 @@ function generateTagCloud(){
 }
 
 function drawChart( result ){
-  var labels = [];
+  var labels = [ '開放性', '誠実さ', '外向性', '協調性', '感情' ];
   var data = [];
 
   if( result && result.result && result.result.personality ){
     for( var i = 0; i < 5; i ++ ){
       var personality = result.result.personality[i];
-      labels.push( personality.name );
+      //labels.push( personality.name ); //. [ 'Openness', 'Conscientiousness', 'Extraversion', 'Agreeableness', 'Emotional range' ]
       data.push( personality.percentile );
     }
   }
@@ -131,36 +131,27 @@ function drawChart( result ){
       {
         label: 'Personality Insights',
         data: data,
-        backgroundColor: [
-          'rgba( 255,  99, 132, 0.2 )',
-          'rgba(  54, 162, 235, 0.2 )',
-          'rgba( 255, 206,  86, 0.2 )',
-          'rgba(  75, 192, 192, 0.2 )',
-          'rgba( 153, 102, 255, 0.2 )',
-        ],
-        borderColor: [
-          'rgba( 255,  99, 132, 0.2 )',
-          'rgba(  54, 162, 235, 0.2 )',
-          'rgba( 255, 206,  86, 0.2 )',
-          'rgba(  75, 192, 192, 0.2 )',
-          'rgba( 153, 102, 255, 0.2 )',
-        ],
-        borderWidth: 1
+        backgroundColor: 'rgba( 230, 230, 230, 0.5 )',
+        borderColor: 'rgba( 255,   0,   0, 1 )',
+        fill: true,
+        borderWidth: 3
       }
     ]
   };
   var options = {
     scales: {
-      y: {
-        beginAtZero: true
+      r: {
+        min: 0.0,
+        max: 1.0,
+        backgroundColor: 'snow'
       }
     }
   };
 
-  $('#chart_td').html( '<canvas id="mychart" width="400" height="300"></canvas>' );
+  $('#chart_td').html( '<canvas id="mychart" width="400" height="400"></canvas>' );
   var ctx = document.getElementById( 'mychart' );
   var chart = new Chart( ctx, {
-    type: 'bar',
+    type: 'radar',
     data: data,
     options: options
   });
