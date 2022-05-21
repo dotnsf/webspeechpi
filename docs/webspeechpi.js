@@ -118,12 +118,12 @@ function isValidTag( tag ){
   }else if( tag.length > 2 ){
     r = true;
   }else{
-    var b = false;
-    for( var i = 0; i < tag.length && !b; i ++ ){
+    var b = true;
+    for( var i = 0; i < tag.length && b; i ++ ){
       var c = tag.substr( i, 1 );
-      b = !( 'あ' <= c && c <= 'ん' );
+      b = ( 'あ' <= c && c <= 'ん' );
     }
-    r = b;
+    r = !b;
   }
 
   return r;
