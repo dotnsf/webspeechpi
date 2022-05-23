@@ -5,8 +5,8 @@ var segmenter = new TinySegmenter();
 var flag_speech = 0;
 var texts = '';
 
+var recognition = null;
 function vr_function() {
-  var recognition = null;
   try{
     window.SpeechRecognition = window.SpeechRecognition || webkitSpeechRecognition;
     recognition = new SpeechRecognition();
@@ -67,6 +67,22 @@ function vr_function() {
   }
 
   $('#miconbtnspan').css( 'display', 'none' );
+  $('#micoffbtnspan').css( 'display', 'block' );
+}
+
+function stop_vr_function() {
+  if( recognition ){
+    recognition.onsoundstart = function(){};
+    recognition.onnomatch = function(){};
+    recognition.onerror = function(){};
+    recognition.onsoundend = function(){};
+    recognition.onresult = function( event ){};
+
+    recognition = null;
+  }
+
+  $('#miconbtnspan').css( 'display', 'block' );
+  $('#micoffbtnspan').css( 'display', 'none' );
 }
 
 function generateTagCloud(){
@@ -129,7 +145,7 @@ function drawChart( result ){
     labels: labels,
     datasets: [
       {
-        label: 'Personality Insights',
+        label: '性格診断',
         data: data,
         backgroundColor: 'rgba( 230, 230, 230, 0.5 )',
         borderColor: 'rgba( 255,   0,   0, 1 )',
