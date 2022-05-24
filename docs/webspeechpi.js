@@ -144,7 +144,7 @@ function debugRandomResult(){
   for( var i = 0; i < 5; i ++ ){
     var personality = {
       name: "" + i,
-      pertentile: Math.random()
+      percentile: Math.random()
     };
     result.result.personality.push( personality );
   }
