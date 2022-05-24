@@ -62,12 +62,12 @@ function vr_function() {
     flag_speech = 0;
     $('#status').html( 'Start' );
     recognition.start();
+
+    $('#miconbtnspan').css( 'display', 'none' );
+    $('#micoffbtnspan').css( 'display', 'block' );
   }else{
     alert( "このブラウザでは Web Speech API がサポートされていません" );
   }
-
-  $('#miconbtnspan').css( 'display', 'none' );
-  $('#micoffbtnspan').css( 'display', 'block' );
 }
 
 function stop_vr_function() {
