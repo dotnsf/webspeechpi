@@ -189,7 +189,7 @@ function drawChart( result ){
         borderWidth: 3
       },
       {
-        label: '性格診断',
+        label: 'AI性格診断',
         data: data,
         backgroundColor: 'rgba( 230, 230, 230, 0.5 )',
         borderColor: borderc, //'rgba( 255,   0,   0, 1 )',
