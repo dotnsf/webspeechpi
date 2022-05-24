@@ -29,19 +29,27 @@ function vr_function() {
     recognition.continuous = true;
 
     recognition.onsoundstart = function() {
-      $('#status').html( '認識中' );
+      //$('#status').html( '認識中' );
+      $('#result_text').addClass( 'result_doing' );
+      $('#result_text').val( '（認識中）' );
     };
     recognition.onnomatch = function() {
-      $('#status').html( 'もう一度試してください。' );
+      //$('#status').html( 'もう一度試してください。' );
+      $('#result_text').addClass( 'result_onerror' );
+      $('#result_text').val( '（もう一度試してください）' );
     };
     recognition.onerror = function() {
-      $('#status').html( 'エラー' );
+      //$('#status').html( 'エラー' );
+      $('#result_text').addClass( 'result_onerror' );
+      $('#result_text').val( '（エラー）' );
       if( flag_speech == 0 ){
         vr_function();
       }
     };
     recognition.onsoundend = function() {
-      $('#status').html( '停止中' );
+      //$('#status').html( '停止中' );
+      $('#result_text').addClass( 'result_doing' );
+      $('#result_text').val( '（停止中）' );
       vr_function();
     };
 
@@ -52,7 +60,9 @@ function vr_function() {
         if( results[i].isFinal ){
           var text = results[i][0].transcript;
           var confidence = results[i][0].confidence;
-          $('#result_text').html( text );
+          //$('#result_text').html( text );
+          $('#result_text').addClass( 'result_ok' );
+          $('#result_text').val( text );
 
           texts += ( ' ' + text );
           $('#result_texts').html( texts );
@@ -63,14 +73,16 @@ function vr_function() {
           generateTagCloud();
         }else{
           var text = results[i][0].transcript;
-          $('#result_text').html( "[途中経過] " + text );
+          $('#result_text').addClass( 'result_doing' );
+          //$('#result_text').html( "[途中経過] " + text );
+          $('#result_text').val( text );
           flag_speech = 1;
         }
       }
     }
 
     flag_speech = 0;
-    $('#status').html( 'Start' );
+    //$('#status').html( 'Start' );
     recognition.start();
 
     $('#miconbtnspan').css( 'display', 'none' );

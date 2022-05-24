@@ -6,6 +6,16 @@
   padding-left: .5rem !important;
 }
 
+.result_onerror{
+  background-color: #fcc;
+}
+.result_doing{
+  background-color: #ffc;
+}
+.result_ok{
+  background-color: #cfc;
+}
+
 #result_texts{
   display: none;
 }
