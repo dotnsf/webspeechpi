@@ -5,6 +5,16 @@ var segmenter = new TinySegmenter();
 var flag_speech = 0;
 var texts = '';
 
+var static_pi = [];
+$(function(){
+  for( var i = 0; i < 5; i ++ ){
+    static_pi.push( Math.random() );
+  }
+});
+
+var pi_url = ''; //'./api/pi';
+var borderc = 'rgba( 255, 150, 150, 1 )';
+
 var recognition = null;
 function vr_function() {
   try{
@@ -109,26 +119,29 @@ function generateTagCloud(){
 
   if( word_list.length >= MIN_WORDS_PI ){
     $('#result_pi').html( '' );
-    /*
-    $.ajax({
-      url: './api/pi',
-      type: 'POST',
-      data: { text: texts },
-      dataType: 'json',
-      success: function( result ){
-        //console.log( result );
-        $('#result_pi').html( JSON.stringify( result, null, 2 ) );
 
-        //. Chart.js
-        drawChart( result );
-      },
-      error: function( e0, e1, e2 ){
-        console.log( e0, e1, e2 );
-      }
-    });
-    */
-    var result = debugRandomResult();
-    drawChart( result );
+    if( pi_url ){
+      borderc = 'rgba( 255,   0,   0, 1 )';
+      $.ajax({
+        url: pi_url,
+        type: 'POST',
+        data: { text: texts },
+        dataType: 'json',
+        success: function( result ){
+          //console.log( result );
+          $('#result_pi').html( JSON.stringify( result, null, 2 ) );
+
+          //. Chart.js
+          drawChart( result );
+        },
+        error: function( e0, e1, e2 ){
+          console.log( e0, e1, e2 );
+        }
+      });
+    }else{
+      var result = debugRandomResult();
+      drawChart( result );
+    }
   }
 }
 
@@ -168,10 +181,18 @@ function drawChart( result ){
     labels: labels,
     datasets: [
       {
+        label: '自己申告',
+        data: static_pi,
+        backgroundColor: 'rgba( 230, 230, 230, 0.5 )',
+        borderColor: 'rgba(   0, 255,   0, 1 )',
+        fill: true,
+        borderWidth: 3
+      },
+      {
         label: '性格診断',
         data: data,
         backgroundColor: 'rgba( 230, 230, 230, 0.5 )',
-        borderColor: 'rgba( 255,   0,   0, 1 )',
+        borderColor: borderc, //'rgba( 255,   0,   0, 1 )',
         fill: true,
         borderWidth: 3
       }
