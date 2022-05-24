@@ -111,8 +111,7 @@ function generateTagCloud(){
     $('#result_pi').html( '' );
     /*
     $.ajax({
-      //url: './api/pi',
-      url: 'https://urapi.herokuapp.com/api/pi',
+      url: './api/pi',
       type: 'POST',
       data: { text: texts },
       dataType: 'json',
