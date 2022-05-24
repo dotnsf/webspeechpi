@@ -30,16 +30,19 @@ function vr_function() {
 
     recognition.onsoundstart = function() {
       //$('#status').html( '認識中' );
+      console.log( '認識中' );
       $('#result_text').addClass( 'result_doing' );
       $('#result_text').val( '（認識中）' );
     };
     recognition.onnomatch = function() {
       //$('#status').html( 'もう一度試してください。' );
+      console.log( 'もう一度試してください' );
       $('#result_text').addClass( 'result_onerror' );
       $('#result_text').val( '（もう一度試してください）' );
     };
     recognition.onerror = function() {
       //$('#status').html( 'エラー' );
+      console.log( 'エラー' );
       $('#result_text').addClass( 'result_onerror' );
       $('#result_text').val( '（エラー）' );
       if( flag_speech == 0 ){
@@ -48,6 +51,7 @@ function vr_function() {
     };
     recognition.onsoundend = function() {
       //$('#status').html( '停止中' );
+      console.log( '停止中' );
       $('#result_text').addClass( 'result_doing' );
       $('#result_text').val( '（停止中）' );
       vr_function();
@@ -72,6 +76,7 @@ function vr_function() {
           //. タグクラウド
           generateTagCloud();
         }else{
+          console.log( '途中経過' );
           var text = results[i][0].transcript;
           $('#result_text').addClass( 'result_doing' );
           //$('#result_text').html( "[途中経過] " + text );
