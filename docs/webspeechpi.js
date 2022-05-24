@@ -109,6 +109,7 @@ function generateTagCloud(){
 
   if( word_list.length >= MIN_WORDS_PI ){
     $('#result_pi').html( '' );
+    /*
     $.ajax({
       //url: './api/pi',
       url: 'https://urapi.herokuapp.com/api/pi',
@@ -123,11 +124,34 @@ function generateTagCloud(){
         drawChart( result );
       },
       error: function( e0, e1, e2 ){
-        console.log( e1, e1, e2 );
+        console.log( e0, e1, e2 );
       }
     });
+    */
+    var result = debugRandomResult();
+    drawChart( result );
   }
 }
+
+
+function debugRandomResult(){
+  var result = { 
+    result: {
+      personality: []
+    }
+  };
+
+  for( var i = 0; i < 5; i ++ ){
+    var personality = {
+      name: "" + i,
+      pertentile: Math.random()
+    };
+    result.result.personality.push( personality );
+  }
+
+  return result;
+}
+
 
 function drawChart( result ){
   var labels = [ '開放性', '誠実さ', '外向性', '協調性', '感情' ];
