@@ -43,8 +43,9 @@ function vr_function() {
     recognition.onerror = function() {
       //$('#status').html( 'エラー' );
       console.log( 'エラー' );
-      myAddClass( '#result_text', 'result_onerror' );
-      $('#result_text').val( '（エラー）' );
+      //myAddClass( '#result_text', 'result_onerror' );
+      myAddClass( '#result_text' );
+      //$('#result_text').val( '（エラー）' );
       if( flag_speech == 0 ){
         vr_function();
       }
