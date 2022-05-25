@@ -257,5 +257,7 @@ function myAddClass( target, c ){
   $(target).removeClass( "result_onerror" );
   $(target).removeClass( "result_doing" );
   $(target).removeClass( "result_ok" );
-  $(target).addClass( c );
+  if( c ){
+    $(target).addClass( c );
+  }
 }
