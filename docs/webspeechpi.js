@@ -184,7 +184,7 @@ function debugRandomResult(){
 
 
 function drawChart( result ){
-  var labels = [ '開放性', '誠実さ', '外向性', '協調性', '感情' ];
+  var labels = [ '知的好奇心', '誠実性', '外向性', '協調性', '感情起伏' ];
   var data = [];
 
   if( result && result.result && result.result.personality ){
