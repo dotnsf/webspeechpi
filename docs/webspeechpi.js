@@ -12,7 +12,7 @@ $(function(){
   }
 });
 
-var pi_url = ''; //'./api/pi';
+var pi_url = 'https://dotnsf-yapi.herokuapp.com/api/yapi'; //'./api/pi';
 var borderc = 'rgba( 255, 150, 150, 1 )';
 
 var recognition = null;
@@ -69,7 +69,7 @@ function vr_function() {
           myAddClass( '#result_text', 'result_ok' );
           $('#result_text').val( text );
 
-          texts += ( ' ' + text );
+          texts += ( ' ' + text + '。' );
           $('#result_texts').html( texts );
           
           vr_function();
