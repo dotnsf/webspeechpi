@@ -248,7 +248,7 @@ function isValidTag( tag ){
     var b = true;
     for( var i = 0; i < tag.length && b; i ++ ){
       var c = tag.substr( i, 1 );
-      b = ( 'あ' <= c && c <= 'ん' );
+      b = ( ( 'あ' <= c && c <= 'ん' ) || c == '。' );
     }
     r = !b;
   }
