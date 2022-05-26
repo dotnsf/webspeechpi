@@ -185,15 +185,16 @@ function debugRandomResult(){
 
 function drawChart( result ){
   var labels = [ '知的好奇心', '誠実性', '外向性', '協調性', '感情起伏' ];
-  var data = [];
+  var pdata = [];
 
   if( result && result.result && result.result.personality ){
     for( var i = 0; i < result.result.personality.length; i ++ ){
       var personality = result.result.personality[i];
       //labels.push( personality.name ); //. [ 'Openness', 'Conscientiousness', 'Extraversion', 'Agreeableness', 'Emotional range' ]
-      data.push( personality.percentile );
+      pdata.push( personality.percentile );
     }
   }
+  console.log( pdata );
 
   var data = {
     labels: labels,
@@ -208,7 +209,7 @@ function drawChart( result ){
       },
       {
         label: 'AI性格診断',
-        data: data,
+        data: pdata,
         backgroundColor: 'rgba( 230, 230, 230, 0.5 )',
         borderColor: borderc, //'rgba( 255,   0,   0, 1 )',
         fill: true,
@@ -225,6 +226,7 @@ function drawChart( result ){
       }
     }
   };
+  console.log( data );
 
   $('#chart_td').html( '<canvas id="mychart" width="400" height="400"></canvas>' );
   var ctx = document.getElementById( 'mychart' );
