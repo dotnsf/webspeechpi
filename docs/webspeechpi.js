@@ -146,7 +146,6 @@ function generateTagCloud(){
         data: { text: texts },
         dataType: 'json',
         success: function( result ){
-          console.log( result );
           $('#result_pi').html( JSON.stringify( result, null, 2 ) );
 
           //. Chart.js
@@ -194,7 +193,6 @@ function drawChart( result ){
       pdata.push( personality.percentile );
     }
   }
-  console.log( pdata );
 
   var data = {
     labels: labels,
@@ -226,7 +224,6 @@ function drawChart( result ){
       }
     }
   };
-  console.log( data );
 
   $('#chart_td').html( '<canvas id="mychart" width="400" height="400"></canvas>' );
   var ctx = document.getElementById( 'mychart' );
