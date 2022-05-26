@@ -146,7 +146,7 @@ function generateTagCloud(){
         data: { text: texts },
         dataType: 'json',
         success: function( result ){
-          //console.log( result );
+          console.log( result );
           $('#result_pi').html( JSON.stringify( result, null, 2 ) );
 
           //. Chart.js
