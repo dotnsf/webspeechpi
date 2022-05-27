@@ -32,13 +32,15 @@ function vr_function() {
       //$('#status').html( '認識中' );
       console.log( '認識中' );
       myAddClass( '#result_text', 'result_doing' );
-      $('#result_text').val( '（認識中）' );
+      $('#result_text').html( '（認識中）' );
+      showBalloon();
     };
     recognition.onnomatch = function() {
       //$('#status').html( 'もう一度試してください。' );
       console.log( 'もう一度試してください' );
       myAddClass( '#result_text', 'result_onerror' );
-      $('#result_text').val( '（もう一度試してください）' );
+      $('#result_text').html( '（もう一度試してください）' );
+      showBalloon();
     };
     recognition.onerror = function() {
       //$('#status').html( 'エラー' );
@@ -54,7 +56,8 @@ function vr_function() {
       //$('#status').html( '停止中' );
       console.log( '停止中' );
       myAddClass( '#result_text', 'result_doing' );
-      $('#result_text').val( '（停止中）' );
+      $('#result_text').html( '（停止中）' );
+      showBalloon();
       vr_function();
     };
 
@@ -67,7 +70,8 @@ function vr_function() {
           var confidence = results[i][0].confidence;
           //$('#result_text').html( text );
           myAddClass( '#result_text', 'result_ok' );
-          $('#result_text').val( text );
+          $('#result_text').html( text );
+          showBalloon();
 
           texts += ( ' ' + text + '。' );
           $('#result_texts').html( texts );
@@ -81,7 +85,8 @@ function vr_function() {
           var text = results[i][0].transcript;
           myAddClass( '#result_text', 'result_doing' );
           //$('#result_text').html( "[途中経過] " + text );
-          $('#result_text').val( text );
+          $('#result_text').html( text );
+          showBalloon();
           flag_speech = 1;
         }
       }
@@ -260,4 +265,14 @@ function myAddClass( target, c ){
   if( c ){
     $(target).addClass( c );
   }
+}
+
+//. Balloon fade in/out
+var timer = null;
+function showBalloon(){
+  clearTimeout( timer );
+  $('#result_text_div').toggleClass( 'visible' );
+  timer = setTimeout( function(){
+    $('#result_text_div').toggleClass( 'visible' );
+  }, 1000 );
 }
