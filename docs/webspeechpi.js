@@ -38,7 +38,7 @@ function vr_function() {
     };
     recognition.onerror = function() {
       console.log( 'エラー' );
-      $('#result_text').html( '（エラー）' );
+      $('#result_text').html( '' );
       if( flag_speech == 0 ){
         vr_function();
       }
