@@ -29,25 +29,22 @@ function vr_function() {
     recognition.continuous = true;
 
     recognition.onsoundstart = function() {
-      //$('#status').html( '認識中' );
       console.log( '認識中' );
       //myAddClass( '#result_text', 'result_doing' );
-      //$('#result_text').html( '（認識中）' );
-      showBalloon();
+      $('#result_text').html( '（認識中）' );
+      //showBalloon();
     };
     recognition.onnomatch = function() {
-      //$('#status').html( 'もう一度試してください。' );
       console.log( 'もう一度試してください' );
       //myAddClass( '#result_text', 'result_onerror' );
-      //$('#result_text').html( '（もう一度試してください）' );
+      $('#result_text').html( '（もう一度試してください）' );
       //showBalloon();
     };
     recognition.onerror = function() {
-      //$('#status').html( 'エラー' );
       console.log( 'エラー' );
       //myAddClass( '#result_text', 'result_onerror' );
       //myAddClass( '#result_text' );
-      //$('#result_text').val( '（エラー）' );
+      $('#result_text').html( '（エラー）' );
       if( flag_speech == 0 ){
         vr_function();
       }
@@ -57,7 +54,7 @@ function vr_function() {
       //$('#status').html( '停止中' );
       console.log( '停止中' );
       //myAddClass( '#result_text', 'result_doing' );
-      //$('#result_text').html( '（停止中）' );
+      $('#result_text').html( '（停止中）' );
       //showBalloon();
       vr_function();
     };
@@ -69,10 +66,10 @@ function vr_function() {
         if( results[i].isFinal ){
           var text = results[i][0].transcript;
           var confidence = results[i][0].confidence;
-          //$('#result_text').html( text );
+          $('#result_text').html( text );
           //myAddClass( '#result_text', 'result_ok' );
           $('#result_text').html( text );
-          showBalloon();
+          //showBalloon();
 
           texts += ( ' ' + text + '。' );
           $('#result_texts').html( texts );
@@ -85,16 +82,14 @@ function vr_function() {
           console.log( '途中経過' );
           var text = results[i][0].transcript;
           //myAddClass( '#result_text', 'result_doing' );
-          //$('#result_text').html( "[途中経過] " + text );
           $('#result_text').html( text );
-          showBalloon();
+          //showBalloon();
           flag_speech = 1;
         }
       }
     }
 
     flag_speech = 0;
-    //$('#status').html( 'Start' );
     recognition.start();
 
     $('#miconbtnspan').css( 'display', 'none' );
