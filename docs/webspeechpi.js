@@ -29,32 +29,24 @@ function vr_function() {
     recognition.continuous = true;
 
     recognition.onsoundstart = function() {
-      //$('#status').html( '認識中' );
       console.log( '認識中' );
-      myAddClass( '#result_text', 'result_doing' );
-      $('#result_text').val( '（認識中）' );
+      $('#result_text').html( '（認識中）' );
     };
     recognition.onnomatch = function() {
-      //$('#status').html( 'もう一度試してください。' );
       console.log( 'もう一度試してください' );
-      myAddClass( '#result_text', 'result_onerror' );
-      $('#result_text').val( '（もう一度試してください）' );
+      $('#result_text').html( '（もう一度試してください）' );
     };
     recognition.onerror = function() {
-      //$('#status').html( 'エラー' );
       console.log( 'エラー' );
-      //myAddClass( '#result_text', 'result_onerror' );
-      myAddClass( '#result_text' );
-      //$('#result_text').val( '（エラー）' );
+      $('#result_text').html( '' );
       if( flag_speech == 0 ){
         vr_function();
       }
     };
     recognition.onsoundend = function() {
-      //$('#status').html( '停止中' );
+      //. 途中まで認識していたが完成形の文章として認識できなかった場合のリセット処理？
       console.log( '停止中' );
-      myAddClass( '#result_text', 'result_doing' );
-      $('#result_text').val( '（停止中）' );
+      $('#result_text').html( '（停止中）' );
       vr_function();
     };
 
@@ -65,9 +57,7 @@ function vr_function() {
         if( results[i].isFinal ){
           var text = results[i][0].transcript;
           var confidence = results[i][0].confidence;
-          //$('#result_text').html( text );
-          myAddClass( '#result_text', 'result_ok' );
-          $('#result_text').val( text );
+          $('#result_text').html( text );
 
           texts += ( ' ' + text + '。' );
           $('#result_texts').html( texts );
@@ -79,16 +69,13 @@ function vr_function() {
         }else{
           console.log( '途中経過' );
           var text = results[i][0].transcript;
-          myAddClass( '#result_text', 'result_doing' );
-          //$('#result_text').html( "[途中経過] " + text );
-          $('#result_text').val( text );
+          $('#result_text').html( text );
           flag_speech = 1;
         }
       }
     }
 
     flag_speech = 0;
-    //$('#status').html( 'Start' );
     recognition.start();
 
     $('#miconbtnspan').css( 'display', 'none' );
@@ -262,4 +249,14 @@ function myAddClass( target, c ){
   if( c ){
     $(target).addClass( c );
   }
+}
+
+//. Balloon fade in/out
+var timer = null;
+function showBalloon(){
+  clearTimeout( timer );
+  $('#result_text_div').toggleClass( 'visible' );
+  timer = setTimeout( function(){
+    $('#result_text_div').toggleClass( 'visible' );
+  }, 1000 );
 }
