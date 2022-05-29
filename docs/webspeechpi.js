@@ -197,6 +197,7 @@ function drawChart( result ){
   var data = {
     labels: labels,
     datasets: [
+      /*
       {
         label: '自己申告',
         data: static_pi,
@@ -205,6 +206,7 @@ function drawChart( result ){
         fill: true,
         borderWidth: 3
       },
+      */
       {
         label: 'AI性格診断',
         data: pdata,
