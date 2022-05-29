@@ -13,6 +13,13 @@
   display: none;
 }
 
+.balloon-show{
+  display: block;
+}
+.balloon-hide{
+  display: none;
+}
+
 .balloon-left {
   position: absolute;
   display: inline-block;

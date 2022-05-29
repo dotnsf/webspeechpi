@@ -30,14 +30,20 @@ function vr_function() {
 
     recognition.onsoundstart = function() {
       console.log( '認識中' );
+      $('#result_text_div').removeClass( 'balloon-hide' );
+      $('#result_text_div').addClass( 'balloon-show' );
       $('#result_text').html( '（認識中）' );
     };
     recognition.onnomatch = function() {
       console.log( 'もう一度試してください' );
+      $('#result_text_div').removeClass( 'balloon-hide' );
+      $('#result_text_div').addClass( 'balloon-show' );
       $('#result_text').html( '（もう一度試してください）' );
     };
     recognition.onerror = function() {
       console.log( 'エラー' );
+      $('#result_text_div').removeClass( 'balloon-show' );
+      $('#result_text_div').addClass( 'balloon-hide' );
       $('#result_text').html( '' );
       if( flag_speech == 0 ){
         vr_function();
@@ -46,6 +52,8 @@ function vr_function() {
     recognition.onsoundend = function() {
       //. 途中まで認識していたが完成形の文章として認識できなかった場合のリセット処理？
       console.log( '停止中' );
+      $('#result_text_div').removeClass( 'balloon-show' );
+      $('#result_text_div').addClass( 'balloon-hide' );
       $('#result_text').html( '（停止中）' );
       vr_function();
     };
@@ -57,6 +65,8 @@ function vr_function() {
         if( results[i].isFinal ){
           var text = results[i][0].transcript;
           var confidence = results[i][0].confidence;
+          $('#result_text_div').removeClass( 'balloon-hide' );
+          $('#result_text_div').addClass( 'balloon-show' );
           $('#result_text').html( text );
 
           texts += ( ' ' + text + '。' );
@@ -69,6 +79,8 @@ function vr_function() {
         }else{
           console.log( '途中経過' );
           var text = results[i][0].transcript;
+          $('#result_text_div').removeClass( 'balloon-hide' );
+          $('#result_text_div').addClass( 'balloon-show' );
           $('#result_text').html( text );
           flag_speech = 1;
         }
